@@ -1,0 +1,17 @@
+/* First, import the Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Then, add your custom styles */
+.hero-section {
+  /* The gradient background */
+  background: linear-gradient(90deg, #1e3a8a, #1d4ed8, #14b8a6);
+
+  /* A placeholder for the wavy lines. 
+     You would create an SVG file for these lines and use it here.
+     For example: background-image: url('/wavy-lines.svg'); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
