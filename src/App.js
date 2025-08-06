@@ -1,24 +1,19 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import HowItWorks from './components/HowItWorks';
-import Features from './components/Features';
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
-    <div className="bg-white font-sans">
-      {/* Navbar and Hero are designed to overlap */}
-      <Navbar />
-      <HeroSection />
-
-      {/* The rest of the page follows */}
-      <main>
-        <HowItWorks />
-        <Features />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        {/* We will add more routes here later, like /dashboard */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
