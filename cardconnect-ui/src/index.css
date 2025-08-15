@@ -1,0 +1,43 @@
+/* Part 1: Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+/* Part 2: Import Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Part 3: Custom Styles */
+
+.hero-section {
+  /* We slightly adjust the gradient for a smoother looping animation */
+  background: linear-gradient(120deg, #1e3a8a, #14b8a6, #1d4ed8, #1e3a8a);
+  
+  /* NEW: Make the background much larger than the container */
+  background-size: 300% 300%;
+
+  /* NEW: Apply the animation */
+  animation: animated-gradient 18s ease-in-out infinite;
+  
+  /* --- Previous styles --- */
+  background-repeat: no-repeat;
+  background-position: center;
+}/* NEW: Define the animation keyframes */
+@keyframes animated-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+/* Helper class for scroll animations */
+.animate-on-load {
+  opacity: 0;
+}
