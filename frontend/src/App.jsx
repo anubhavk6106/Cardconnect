@@ -10,6 +10,7 @@ import BuyerDashboard from './pages/BuyerDashboard'
 import CardOwnerDashboard from './pages/CardOwnerDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import ProductBrowse from './pages/ProductBrowseEnhanced'
+import BrowseProducts from './pages/BrowseProducts'
 import TransactionHistory from './pages/TransactionHistory'
 import ProfileSettings from './pages/ProfileSettings'
 import './App.css'
@@ -32,9 +33,15 @@ function App() {
                 </PrivateRoute>
               } />
               
-              <Route path="/browse-products" element={
+              <Route path="/browse-cards" element={
                 <PrivateRoute role="buyer">
                   <ProductBrowse />
+                </PrivateRoute>
+              } />
+              
+              <Route path="/browse-products" element={
+                <PrivateRoute role="buyer">
+                  <BrowseProducts />
                 </PrivateRoute>
               } />
               
