@@ -1,0 +1,152 @@
+.image-upload {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.upload-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+.upload-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-label {
+  cursor: pointer;
+  text-align: center;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+.upload-label:hover {
+  background: #f0f0f0;
+}
+
+.upload-icon {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+.upload-label p {
+  margin: 10px 0 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+.upload-label small {
+  color: #666;
+  font-size: 0.85em;
+}
+
+.preview-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.clear-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.clear-btn:hover:not(:disabled) {
+  background: rgba(255, 0, 0, 1);
+  transform: scale(1.1);
+}
+
+.clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.upload-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: #3399cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.upload-btn:hover {
+  background: #2980b9;
+}
+
+.upload-progress {
+  text-align: center;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3399cc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.upload-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 15px;
+  border: 1px solid #f5c6cb;
+}
+
+.upload-success {
+  background: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 4px;
+  margin-top: 15px;
+  border: 1px solid #c3e6cb;
+}
