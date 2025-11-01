@@ -1,0 +1,52 @@
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 700;
+  cursor: help;
+  transition: transform 0.2s;
+}
+
+.verified-badge:hover {
+  transform: scale(1.1);
+}
+
+/* Size Variations */
+.verified-badge.small {
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+}
+
+.verified-badge.medium {
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+}
+
+.verified-badge.large {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+}
+
+/* Level Variations */
+.verified-badge.verified-basic {
+  background: #e6fffa;
+  color: #319795;
+  border: 2px solid #319795;
+}
+
+.verified-badge.verified-standard {
+  background: #c6f6d5;
+  color: #38a169;
+  border: 2px solid #38a169;
+}
+
+.verified-badge.verified-premium {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #744210;
+  border: 2px solid #d69e2e;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}

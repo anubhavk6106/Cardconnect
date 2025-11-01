@@ -9,6 +9,10 @@ import Register from './pages/Register'
 import BuyerDashboard from './pages/BuyerDashboard'
 import CardOwnerDashboard from './pages/CardOwnerDashboard'
 import AdminDashboard from './pages/AdminDashboard'
+import AnalyticsDashboard from './pages/AnalyticsDashboard'
+import ChatPage from './pages/ChatPage'
+import KYCVerification from './pages/KYCVerification'
+import KYCAdminPanel from './pages/KYCAdminPanel'
 import ProductBrowse from './pages/ProductBrowseEnhanced'
 import BrowseProducts from './pages/BrowseProducts'
 import TransactionHistory from './pages/TransactionHistory'
@@ -54,6 +58,30 @@ function App() {
               <Route path="/admin/dashboard" element={
                 <PrivateRoute role="admin">
                   <AdminDashboard />
+                </PrivateRoute>
+              } />
+              
+              <Route path="/admin/analytics" element={
+                <PrivateRoute role="admin">
+                  <AnalyticsDashboard />
+                </PrivateRoute>
+              } />
+              
+              <Route path="/chat" element={
+                <PrivateRoute>
+                  <ChatPage />
+                </PrivateRoute>
+              } />
+              
+              <Route path="/kyc/verify" element={
+                <PrivateRoute>
+                  <KYCVerification />
+                </PrivateRoute>
+              } />
+              
+              <Route path="/admin/kyc" element={
+                <PrivateRoute role="admin">
+                  <KYCAdminPanel />
                 </PrivateRoute>
               } />
               

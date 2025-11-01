@@ -38,6 +38,27 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null
   },
+  verification: {
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+    status: {
+      type: String,
+      enum: ['none', 'pending', 'under_review', 'approved', 'rejected'],
+      default: 'none'
+    },
+    level: {
+      type: String,
+      enum: ['none', 'basic', 'verified', 'premium'],
+      default: 'none'
+    },
+    kycId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'KYC',
+      default: null
+    }
+  },
   stats: {
     totalTransactions: {
       type: Number,

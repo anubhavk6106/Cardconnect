@@ -163,3 +163,201 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* KYC Verification Section Styles */
+.kyc-section {
+  margin-top: 2rem;
+}
+
+.kyc-status-card {
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.kyc-status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.kyc-status-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #cbd5e0;
+}
+
+.kyc-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.kyc-details h3 {
+  font-size: 1rem;
+  color: #718096;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kyc-status-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kyc-verified-info {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.kyc-success-msg {
+  color: #22543d;
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+}
+
+.kyc-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.kyc-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kyc-detail-item strong {
+  font-size: 0.875rem;
+  color: #2d3748;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.verification-level-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #3182ce;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.kyc-action-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kyc-message {
+  font-size: 1rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.kyc-rejection-info {
+  background: #fff5f5;
+  border: 1px solid #fc8181;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.btn-kyc {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  box-shadow: 0 4px 6px rgba(49, 130, 206, 0.2);
+}
+
+.btn-kyc:hover {
+  background: linear-gradient(135deg, #2c5282 0%, #2a4365 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(49, 130, 206, 0.3);
+}
+
+.kyc-benefits {
+  background: #ebf8ff;
+  border: 1px solid #90cdf4;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.kyc-benefits h4 {
+  margin: 0 0 1rem 0;
+  color: #2c5282;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.kyc-benefits ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: none;
+}
+
+.kyc-benefits ul li {
+  color: #2d3748;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.kyc-benefits ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #38a169;
+  font-weight: 700;
+}
+
+/* Responsive Styles for KYC Section */
+@media (max-width: 768px) {
+  .kyc-status-card {
+    padding: 1.5rem;
+  }
+
+  .kyc-status-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .kyc-icon {
+    font-size: 2rem;
+  }
+
+  .kyc-status-text {
+    font-size: 1.25rem;
+    justify-content: center;
+  }
+
+  .btn-kyc {
+    width: 100%;
+    text-align: center;
+  }
+}

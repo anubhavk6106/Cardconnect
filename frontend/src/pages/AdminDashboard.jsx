@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const AdminDashboard = () => {
+  const navigate = useNavigate()
   const [stats, setStats] = useState(null)
   const [users, setUsers] = useState([])
   const [transactions, setTransactions] = useState([])
@@ -45,6 +47,13 @@ const AdminDashboard = () => {
       <div className="dashboard-header">
         <h1>Admin Dashboard</h1>
         <p>Platform Management & Analytics</p>
+        <button 
+          className="btn btn-primary"
+          onClick={() => navigate('/admin/analytics')}
+          style={{ marginTop: '15px' }}
+        >
+          📊 View Advanced Analytics
+        </button>
       </div>
 
       {stats && (

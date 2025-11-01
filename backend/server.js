@@ -15,6 +15,9 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const searchRoutes = require('./routes/searchRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const paymentRoutes = require('./routes/payment');
+const analyticsRoutes = require('./routes/analyticsRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+const kycRoutes = require('./routes/kycRoutes');
 
 // Initialize express
 const app = express();
@@ -44,6 +47,9 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/search', searchRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/kyc', kycRoutes);
 
 // Root route
 app.get('/', (req, res) => {
@@ -55,7 +61,10 @@ app.get('/', (req, res) => {
       cards: '/api/cards',
       transactions: '/api/transactions',
       admin: '/api/admin',
-      ai: '/api/ai'
+      ai: '/api/ai',
+      analytics: '/api/analytics',
+      chat: '/api/chat',
+      kyc: '/api/kyc'
     }
   });
 });

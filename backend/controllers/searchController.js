@@ -7,12 +7,9 @@ const Transaction = require('../models/Transaction');
 const searchCards = async (req, res) => {
   try {
     const {
-      platform,
       bankName,
       cardType,
       cardNetwork,
-      minDiscount,
-      maxDiscount,
       minRating,
       sortBy,
       order,
@@ -22,11 +19,6 @@ const searchCards = async (req, res) => {
 
     // Build query
     let query = { isAvailable: true };
-
-    // Filter by platform
-    if (platform) {
-      query['availableDiscounts.platform'] = platform;
-    }
 
     // Filter by bank name (case-insensitive)
     if (bankName) {
@@ -82,24 +74,12 @@ const searchCards = async (req, res) => {
 
     const cards = await cardsQuery;
 
-    // Filter by discount amount if specified
-    let filteredCards = cards;
-    if (minDiscount || maxDiscount) {
-      filteredCards = cards.filter(card => {
-        return card.availableDiscounts.some(discount => {
-          const meetsMin = minDiscount ? discount.discountPercentage >= parseFloat(minDiscount) : true;
-          const meetsMax = maxDiscount ? discount.discountPercentage <= parseFloat(maxDiscount) : true;
-          return meetsMin && meetsMax;
-        });
-      });
-    }
-
     // Get total count for pagination
     const totalCards = await Card.countDocuments(query);
     const totalPages = Math.ceil(totalCards / parseInt(limit));
 
     res.json({
-      cards: filteredCards,
+      cards,
       currentPage: parseInt(page),
       totalPages,
       totalCards,
