@@ -51,7 +51,7 @@ const BuyerDashboard = () => {
   }
 
   const filteredCards = cards.filter(card => {
-    return (!filter.platform || card.availableDiscounts.some(d => d.platform === filter.platform)) &&
+    return (!filter.platform || card.availableDiscounts?.some(d => d.platform === filter.platform)) &&
            (!filter.bankName || card.bankName.toLowerCase().includes(filter.bankName.toLowerCase()))
   })
 
@@ -112,6 +112,9 @@ const BuyerDashboard = () => {
             <option value="Amazon">Amazon</option>
             <option value="Flipkart">Flipkart</option>
             <option value="Myntra">Myntra</option>
+            <option value="Swiggy">Swiggy</option>
+            <option value="Zomato">Zomato</option>
+            <option value="BookMyShow">BookMyShow</option>
           </select>
           
           <input
@@ -140,13 +143,14 @@ const BuyerDashboard = () => {
                 <span className="card-type">{card.cardType}</span>
               </div>
               <p className="card-network">{card.cardNetwork} •••• {card.lastFourDigits}</p>
+              <p className="card-expiry">Exp: {card.expiryDate}</p>
               <div className="card-owner">
                 <strong>Owner:</strong> {card.owner?.name} 
                 <span className="rating">★ {card.rating}/5</span>
               </div>
               <div className="discounts">
                 <strong>Available Discounts:</strong>
-                {card.availableDiscounts.map((discount, idx) => (
+                {card.availableDiscounts?.map((discount, idx) => (
                   <div key={idx} className="discount-item">
                     {discount.platform}: {discount.discountPercentage}% off (Max: ₹{discount.maxDiscount})
                   </div>

@@ -25,6 +25,10 @@ const cardSchema = new mongoose.Schema({
     required: true,
     length: 4
   },
+  expiryDate: {
+    type: String,
+    required: true
+  },
   cardImage: {
     type: String,
     default: null
@@ -32,7 +36,7 @@ const cardSchema = new mongoose.Schema({
   availableDiscounts: [{
     platform: {
       type: String,
-      enum: ['Amazon', 'Flipkart', 'Myntra', 'Other'],
+      enum: ['Amazon', 'Flipkart', 'Myntra', 'Swiggy', 'Zomato', 'BookMyShow', 'MakeMyTrip', 'Nykaa', 'BigBasket', 'Other'],
       required: true
     },
     discountPercentage: {

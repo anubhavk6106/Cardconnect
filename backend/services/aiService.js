@@ -1,6 +1,5 @@
 const Card = require('../models/Card');
 const Transaction = require('../models/Transaction');
-const Product = require('../models/Product');
 
 /**
  * AI-Powered Card Matching Algorithm
@@ -90,49 +89,40 @@ const recommendProducts = async (userId, userRole = 'buyer') => {
       'availableDiscounts.validUntil': { $gt: new Date() }
     });
 
-    // Get all products
-    const products = await Product.find({}).populate('applicableCards');
-
-    // Score products based on multiple factors
-    const scoredProducts = products.map(product => {
+    // Return card-based recommendations instead of products
+    // Map cards to recommendation format
+    const recommendations = cardsWithDiscounts.map(card => {
       let score = 0;
 
-      // Factor 1: Platform preference (30% weight)
-      if (preferredPlatforms.includes(product.platform)) {
-        score += 30;
-      }
+      // Score based on available discounts
+      card.availableDiscounts.forEach(discount => {
+        if (preferredPlatforms.includes(discount.platform)) {
+          score += 30;
+        }
+        if (new Date(discount.validUntil) > new Date()) {
+          score += (discount.discountPercentage / 100) * 40;
+        }
+      });
 
-      // Factor 2: Available discount (40% weight)
-      const applicableCard = cardsWithDiscounts.find(card =>
-        card.availableDiscounts.some(d => 
-          d.platform === product.platform && new Date(d.validUntil) > new Date()
-        )
-      );
+      // Factor in card rating
+      score += (card.rating / 5) * 20;
 
-      if (applicableCard) {
-        const discount = applicableCard.availableDiscounts.find(d => d.platform === product.platform);
-        score += (discount.discountPercentage / 100) * 40;
-      }
-
-      // Factor 3: Popularity (20% weight)
-      score += (product.popularityScore / 100) * 20;
-
-      // Factor 4: Price consideration (10% weight)
-      const discountPercent = ((product.originalPrice - product.currentPrice) / product.originalPrice) * 100;
-      score += (discountPercent / 100) * 10;
+      // Factor in availability
+      const availabilityScore = ((card.usageLimit - card.currentUsage) / card.usageLimit) * 10;
+      score += availabilityScore;
 
       return {
-        product,
+        card,
         score,
-        hasDiscount: !!applicableCard
+        hasDiscount: true
       };
     });
 
     // Sort by score
-    scoredProducts.sort((a, b) => b.score - a.score);
+    recommendations.sort((a, b) => b.score - a.score);
 
     // Return top 20 recommendations
-    return scoredProducts.slice(0, 20);
+    return recommendations.slice(0, 20);
   } catch (error) {
     throw new Error('Product recommendation failed: ' + error.message);
   }

@@ -231,13 +231,14 @@ const ProductBrowseEnhanced = () => {
                       <span className="card-type">{card.cardType}</span>
                     </div>
                     <p className="card-network">{card.cardNetwork} •••• {card.lastFourDigits}</p>
+                    <p className="card-expiry">Exp: {card.expiryDate}</p>
                     <div className="card-owner">
                       <strong>Owner:</strong> {card.owner?.name} 
                       <span className="rating">★ {card.rating}/5</span>
                     </div>
                     <div className="discounts">
                       <strong>Available Discounts:</strong>
-                      {card.availableDiscounts.map((discount, idx) => (
+                      {card.availableDiscounts?.map((discount, idx) => (
                         <div key={idx} className="discount-item">
                           {discount.platform}: {discount.discountPercentage}% off (Max: ₹{discount.maxDiscount})
                         </div>

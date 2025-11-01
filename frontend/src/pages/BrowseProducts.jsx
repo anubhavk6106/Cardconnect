@@ -25,6 +25,7 @@ const BrowseProducts = () => {
   const [submitting, setSubmitting] = useState(false)
   // ✅ Sample product data (with real product links)
   const sampleProducts = [
+    // Amazon Electronics
     {
       _id: '1',
       name: 'iPhone 15 Pro Max',
@@ -35,8 +36,9 @@ const BrowseProducts = () => {
       rating: 4.5,
       productLink: 'https://www.amazon.in/dp/B0CHX8KX4M',
       availableDiscounts: [
-        { bankName: 'HDFC', discount: 10 },
-        { bankName: 'SBI', discount: 8 }
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 5000 },
+        { bankName: 'SBI', discount: 8, maxDiscount: 4000 },
+        { bankName: 'ICICI Bank', discount: 7, maxDiscount: 3500 }
       ]
     },
     {
@@ -49,8 +51,9 @@ const BrowseProducts = () => {
       rating: 4.6,
       productLink: 'https://www.flipkart.com/samsung-galaxy-s24-ultra',
       availableDiscounts: [
-        { bankName: 'ICICI', discount: 12 },
-        { bankName: 'Axis', discount: 7 }
+        { bankName: 'ICICI Bank', discount: 12, maxDiscount: 6000 },
+        { bankName: 'Axis Bank', discount: 10, maxDiscount: 5000 },
+        { bankName: 'HDFC Bank', discount: 9, maxDiscount: 4500 }
       ]
     },
     {
@@ -63,8 +66,9 @@ const BrowseProducts = () => {
       rating: 4.3,
       productLink: 'https://www.myntra.com/nike-air-max',
       availableDiscounts: [
-        { bankName: 'HDFC', discount: 15 },
-        { bankName: 'SBI', discount: 10 }
+        { bankName: 'HDFC Bank', discount: 15, maxDiscount: 1000 },
+        { bankName: 'SBI', discount: 12, maxDiscount: 800 },
+        { bankName: 'Kotak Bank', discount: 10, maxDiscount: 700 }
       ]
     },
     {
@@ -77,8 +81,9 @@ const BrowseProducts = () => {
       rating: 4.7,
       productLink: 'https://www.amazon.in/dp/B0BMF7DQVT',
       availableDiscounts: [
-        { bankName: 'ICICI', discount: 10 },
-        { bankName: 'HDFC', discount: 12 }
+        { bankName: 'ICICI Bank', discount: 12, maxDiscount: 2000 },
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 1500 },
+        { bankName: 'SBI', discount: 8, maxDiscount: 1200 }
       ]
     },
     {
@@ -91,8 +96,9 @@ const BrowseProducts = () => {
       rating: 4.4,
       productLink: 'https://www.myntra.com/adidas-running-shoes',
       availableDiscounts: [
-        { bankName: 'SBI', discount: 15 },
-        { bankName: 'Axis', discount: 8 }
+        { bankName: 'SBI', discount: 15, maxDiscount: 900 },
+        { bankName: 'Axis Bank', discount: 12, maxDiscount: 750 },
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 600 }
       ]
     },
     {
@@ -105,8 +111,9 @@ const BrowseProducts = () => {
       rating: 4.8,
       productLink: 'https://www.flipkart.com/apple-macbook-air-m2',
       availableDiscounts: [
-        { bankName: 'HDFC', discount: 8 },
-        { bankName: 'ICICI', discount: 10 }
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 5500 },
+        { bankName: 'ICICI Bank', discount: 12, maxDiscount: 6000 },
+        { bankName: 'Axis Bank', discount: 8, maxDiscount: 4000 }
       ]
     },
     {
@@ -119,8 +126,9 @@ const BrowseProducts = () => {
       rating: 4.2,
       productLink: 'https://www.myntra.com/levis-denim-jacket',
       availableDiscounts: [
-        { bankName: 'Axis', discount: 12 },
-        { bankName: 'SBI', discount: 10 }
+        { bankName: 'Axis Bank', discount: 12, maxDiscount: 500 },
+        { bankName: 'SBI', discount: 10, maxDiscount: 400 },
+        { bankName: 'Kotak Bank', discount: 8, maxDiscount: 350 }
       ]
     },
     {
@@ -133,8 +141,251 @@ const BrowseProducts = () => {
       rating: 4.6,
       productLink: 'https://www.amazon.in/dp/B0BJL6N9W6',
       availableDiscounts: [
-        { bankName: 'ICICI', discount: 10 },
-        { bankName: 'HDFC', discount: 9 }
+        { bankName: 'ICICI Bank', discount: 11, maxDiscount: 5500 },
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 5000 },
+        { bankName: 'SBI', discount: 8, maxDiscount: 4000 }
+      ]
+    },
+    // More Amazon Products
+    {
+      _id: '9',
+      name: 'OnePlus 11R 5G',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 39999,
+      image: 'https://m.media-amazon.com/images/I/71hNaIi+5OL._SL1500_.jpg',
+      rating: 4.4,
+      productLink: 'https://www.amazon.in/OnePlus-11R-5G',
+      availableDiscounts: [
+        { bankName: 'SBI', discount: 10, maxDiscount: 3000 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 2500 },
+        { bankName: 'ICICI Bank', discount: 7, maxDiscount: 2000 }
+      ]
+    },
+    {
+      _id: '10',
+      name: 'boAt Airdopes 141',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 1299,
+      image: 'https://m.media-amazon.com/images/I/61TpmZLgZxL._SL1500_.jpg',
+      rating: 4.1,
+      productLink: 'https://www.amazon.in/boAt-Airdopes-141',
+      availableDiscounts: [
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 100 },
+        { bankName: 'ICICI Bank', discount: 8, maxDiscount: 80 },
+        { bankName: 'Axis Bank', discount: 5, maxDiscount: 50 }
+      ]
+    },
+    {
+      _id: '11',
+      name: 'Fire-Boltt Phoenix Smart Watch',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 4999,
+      image: 'https://m.media-amazon.com/images/I/61ZuUWO7RsL._SL1500_.jpg',
+      rating: 4.2,
+      productLink: 'https://www.amazon.in/Fire-Boltt-Phoenix',
+      availableDiscounts: [
+        { bankName: 'SBI', discount: 15, maxDiscount: 500 },
+        { bankName: 'HDFC Bank', discount: 12, maxDiscount: 400 },
+        { bankName: 'Kotak Bank', discount: 10, maxDiscount: 350 }
+      ]
+    },
+    {
+      _id: '12',
+      name: 'Redmi Note 13 Pro',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 23999,
+      image: 'https://m.media-amazon.com/images/I/71f5Eu5lJSL._SL1500_.jpg',
+      rating: 4.3,
+      productLink: 'https://www.amazon.in/Redmi-Note-13-Pro',
+      availableDiscounts: [
+        { bankName: 'ICICI Bank', discount: 10, maxDiscount: 2000 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 1500 },
+        { bankName: 'SBI', discount: 7, maxDiscount: 1200 }
+      ]
+    },
+    {
+      _id: '13',
+      name: 'HP 15s Laptop Intel Core i3',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 38990,
+      image: 'https://m.media-amazon.com/images/I/71vvXGmdKWL._SL1500_.jpg',
+      rating: 4.2,
+      productLink: 'https://www.amazon.in/HP-15s-Laptop',
+      availableDiscounts: [
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 3000 },
+        { bankName: 'ICICI Bank', discount: 9, maxDiscount: 2500 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 2000 }
+      ]
+    },
+    {
+      _id: '14',
+      name: 'Kindle Paperwhite',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 13999,
+      image: 'https://m.media-amazon.com/images/I/51QCk82iGcL._SL1000_.jpg',
+      rating: 4.6,
+      productLink: 'https://www.amazon.in/Kindle-Paperwhite',
+      availableDiscounts: [
+        { bankName: 'SBI', discount: 10, maxDiscount: 1000 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 800 },
+        { bankName: 'ICICI Bank', discount: 7, maxDiscount: 700 }
+      ]
+    },
+    {
+      _id: '15',
+      name: 'Logitech MX Master 3S Mouse',
+      platform: 'Amazon',
+      category: 'Electronics',
+      originalPrice: 9995,
+      image: 'https://m.media-amazon.com/images/I/61ni3t1ryQL._SL1500_.jpg',
+      rating: 4.5,
+      productLink: 'https://www.amazon.in/Logitech-MX-Master-3S',
+      availableDiscounts: [
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 800 },
+        { bankName: 'ICICI Bank', discount: 8, maxDiscount: 600 },
+        { bankName: 'SBI', discount: 7, maxDiscount: 500 }
+      ]
+    },
+    {
+      _id: '16',
+      name: 'Atomic Habits Book',
+      platform: 'Amazon',
+      category: 'Books',
+      originalPrice: 599,
+      image: 'https://m.media-amazon.com/images/I/51-nXsSRfZL._SX328_BO1,204,203,200_.jpg',
+      rating: 4.8,
+      productLink: 'https://www.amazon.in/Atomic-Habits-James-Clear',
+      availableDiscounts: [
+        { bankName: 'SBI', discount: 10, maxDiscount: 50 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 40 },
+        { bankName: 'Axis Bank', discount: 5, maxDiscount: 30 }
+      ]
+    },
+    // Flipkart Products
+    {
+      _id: '17',
+      name: 'realme 11 Pro',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 25999,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/p/x/5/-original-imagtc4hqr4jystz.jpeg',
+      rating: 4.4,
+      productLink: 'https://www.flipkart.com/realme-11-pro',
+      availableDiscounts: [
+        { bankName: 'Axis Bank', discount: 12, maxDiscount: 2500 },
+        { bankName: 'ICICI Bank', discount: 10, maxDiscount: 2000 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 1500 }
+      ]
+    },
+    {
+      _id: '18',
+      name: 'Mi LED Smart TV 5A 43 inch',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 25999,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/television/h/i/h/-original-imah2zr7gfrj2fxq.jpeg',
+      rating: 4.3,
+      productLink: 'https://www.flipkart.com/mi-tv-5a',
+      availableDiscounts: [
+        { bankName: 'ICICI Bank', discount: 10, maxDiscount: 2000 },
+        { bankName: 'HDFC Bank', discount: 9, maxDiscount: 1800 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 1500 }
+      ]
+    },
+    {
+      _id: '19',
+      name: 'Noise ColorFit Pro 4 Smart Watch',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 3499,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/smartwatch/l/2/g/-original-imagzvduxh7fqprj.jpeg',
+      rating: 4.2,
+      productLink: 'https://www.flipkart.com/noise-colorfit-pro-4',
+      availableDiscounts: [
+        { bankName: 'Axis Bank', discount: 15, maxDiscount: 400 },
+        { bankName: 'HDFC Bank', discount: 12, maxDiscount: 350 },
+        { bankName: 'SBI', discount: 10, maxDiscount: 300 }
+      ]
+    },
+    {
+      _id: '20',
+      name: 'Asus TUF Gaming Laptop',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 64990,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/computer/d/k/r/-original-imah2z6yhyfdhfzf.jpeg',
+      rating: 4.5,
+      productLink: 'https://www.flipkart.com/asus-tuf-gaming',
+      availableDiscounts: [
+        { bankName: 'ICICI Bank', discount: 10, maxDiscount: 5000 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 4000 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 3500 }
+      ]
+    },
+    {
+      _id: '21',
+      name: 'Canon EOS 1500D DSLR Camera',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 31990,
+      image: 'https://rukminim2.flixcart.com/image/416/416/jfbfde80/dslr-camera/g/y/7/d-eos-1500-canon-original-imaf3t5h9yuyc5zu.jpeg',
+      rating: 4.6,
+      productLink: 'https://www.flipkart.com/canon-eos-1500d',
+      availableDiscounts: [
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 2500 },
+        { bankName: 'ICICI Bank', discount: 9, maxDiscount: 2200 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 2000 }
+      ]
+    },
+    {
+      _id: '22',
+      name: 'Zebronics Gaming Keyboard',
+      platform: 'Flipkart',
+      category: 'Electronics',
+      originalPrice: 1299,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/keyboard/gaming-keyboard/a/k/f/max-pro-usb-wired-keyboard-zebronics-original-imah28yhg6zcjrhj.jpeg',
+      rating: 4.1,
+      productLink: 'https://www.flipkart.com/zebronics-gaming-keyboard',
+      availableDiscounts: [
+        { bankName: 'Axis Bank', discount: 10, maxDiscount: 100 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 80 },
+        { bankName: 'SBI', discount: 7, maxDiscount: 70 }
+      ]
+    },
+    {
+      _id: '23',
+      name: 'Philips Air Fryer',
+      platform: 'Flipkart',
+      category: 'Home',
+      originalPrice: 8999,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/air-fryer/g/f/k/-original-imah2yz4y3zxhegz.jpeg',
+      rating: 4.4,
+      productLink: 'https://www.flipkart.com/philips-air-fryer',
+      availableDiscounts: [
+        { bankName: 'ICICI Bank', discount: 10, maxDiscount: 700 },
+        { bankName: 'HDFC Bank', discount: 8, maxDiscount: 600 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 500 }
+      ]
+    },
+    {
+      _id: '24',
+      name: 'Prestige Induction Cooktop',
+      platform: 'Flipkart',
+      category: 'Home',
+      originalPrice: 2199,
+      image: 'https://rukminim2.flixcart.com/image/416/416/xif0q/induction-cook-top/p/a/h/-original-imagzhghezfvzxfh.jpeg',
+      rating: 4.3,
+      productLink: 'https://www.flipkart.com/prestige-induction',
+      availableDiscounts: [
+        { bankName: 'HDFC Bank', discount: 10, maxDiscount: 200 },
+        { bankName: 'SBI', discount: 8, maxDiscount: 150 },
+        { bankName: 'Axis Bank', discount: 7, maxDiscount: 130 }
       ]
     }
   ]
@@ -186,8 +437,11 @@ const BrowseProducts = () => {
   })
 
   const getBestDiscount = (discounts) => {
-    if (!discounts || discounts.length === 0) return 0
-    return Math.max(...discounts.map(d => d.discount))
+    if (!discounts || discounts.length === 0) return { discount: 0, maxDiscount: 0 }
+    const best = discounts.reduce((max, curr) => 
+      curr.discount > max.discount ? curr : max
+    )
+    return best
   }
 
   // Get cards that offer discounts for this product's platform
@@ -209,12 +463,22 @@ const BrowseProducts = () => {
     setProductUrl('')
     setSelectedCard('')
     
-    // Fetch all available cards (discounts are now on products, not cards)
+    // Fetch cards and filter to show only those with discounts for this product's platform
     try {
       const { data } = await axios.get('/api/cards')
-      // Get all available cards - offer matching happens on backend
-      const availableCards = data.filter(card => card.isAvailable)
-      setAvailableCards(availableCards)
+      // Filter to only show cards that have discounts for this product's platform
+      const cardsWithDiscountsForPlatform = data.filter(card => 
+        card.isAvailable && 
+        card.availableDiscounts && 
+        card.availableDiscounts.some(d => d.platform === product.platform)
+      )
+      
+      if (cardsWithDiscountsForPlatform.length === 0) {
+        alert(`No cards available with discounts for ${product.platform}. Please check back later.`)
+        return
+      }
+      
+      setAvailableCards(cardsWithDiscountsForPlatform)
       setShowRequestModal(true)
     } catch (error) {
       console.error('Error fetching cards:', error)
@@ -357,15 +621,15 @@ const BrowseProducts = () => {
 
                 <div className="available-discounts">
                   <strong>Available Card Discounts:</strong>
-                  {getCardsForProduct(product.platform).length === 0 ? (
-                    <p className="no-discounts">No cards available with discounts for {product.platform}</p>
+                  {!product.availableDiscounts || product.availableDiscounts.length === 0 ? (
+                    <p className="no-discounts">No discounts available for this product</p>
                   ) : (
                     <div className="discount-list">
-                      {getCardsForProduct(product.platform).map((cardWithDiscount) => (
-                        <div key={cardWithDiscount._id} className="discount-tag">
-                          <span className="card-bank">{cardWithDiscount.bankName}</span>
-                          <span className="discount-percent">{cardWithDiscount.applicableDiscount.discountPercentage}% OFF</span>
-                          <span className="discount-max">(Max: ₹{cardWithDiscount.applicableDiscount.maxDiscount})</span>
+                      {product.availableDiscounts.map((discount, idx) => (
+                        <div key={idx} className="discount-tag">
+                          <span className="card-bank">{discount.bankName}</span>
+                          <span className="discount-percent">{discount.discount}% OFF</span>
+                          <span className="discount-max">(Max: ₹{discount.maxDiscount})</span>
                         </div>
                       ))}
                     </div>
@@ -421,11 +685,14 @@ const BrowseProducts = () => {
                   {availableCards.length === 0 ? (
                     <option disabled>No cards available</option>
                   ) : (
-                    availableCards.map(card => (
-                      <option key={card._id} value={card._id}>
-                        {card.bankName} {card.cardNetwork} {card.cardType} •••• {card.lastFourDigits} (Owner: {card.owner?.name})
-                      </option>
-                    ))
+                    availableCards.map(card => {
+                      const discount = card.availableDiscounts?.find(d => d.platform === selectedProduct.platform)
+                      return (
+                        <option key={card._id} value={card._id}>
+                          {card.bankName} {card.cardNetwork} {card.cardType} •••• {card.lastFourDigits} - {discount?.discountPercentage}% OFF (Max: ₹{discount?.maxDiscount}) - Owner: {card.owner?.name}
+                        </option>
+                      )
+                    })
                   )}
                 </select>
               </div>

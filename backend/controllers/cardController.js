@@ -6,7 +6,7 @@ const User = require('../models/User');
 // @access  Private (Card Owner)
 const addCard = async (req, res) => {
   try {
-    const { bankName, cardType, cardNetwork, lastFourDigits, availableDiscounts, usageLimit } = req.body;
+    const { bankName, cardType, cardNetwork, lastFourDigits, expiryDate, availableDiscounts, usageLimit } = req.body;
 
     const card = await Card.create({
       owner: req.user._id,
@@ -14,6 +14,7 @@ const addCard = async (req, res) => {
       cardType,
       cardNetwork,
       lastFourDigits,
+      expiryDate,
       availableDiscounts,
       usageLimit: usageLimit || 5
     });
@@ -105,6 +106,9 @@ const updateCard = async (req, res) => {
 
       card.bankName = req.body.bankName || card.bankName;
       card.cardType = req.body.cardType || card.cardType;
+      card.cardNetwork = req.body.cardNetwork || card.cardNetwork;
+      card.lastFourDigits = req.body.lastFourDigits || card.lastFourDigits;
+      card.expiryDate = req.body.expiryDate || card.expiryDate;
       card.availableDiscounts = req.body.availableDiscounts || card.availableDiscounts;
       card.isAvailable = req.body.isAvailable !== undefined ? req.body.isAvailable : card.isAvailable;
       card.usageLimit = req.body.usageLimit || card.usageLimit;

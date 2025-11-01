@@ -14,6 +14,7 @@ const CardOwnerDashboard = () => {
     cardType: 'credit',
     cardNetwork: 'Visa',
     lastFourDigits: '',
+    expiryDate: '',
     usageLimit: 5,
     cardImage: '',
     availableDiscounts: [{
@@ -56,6 +57,7 @@ const CardOwnerDashboard = () => {
         cardType: 'credit',
         cardNetwork: 'Visa',
         lastFourDigits: '',
+        expiryDate: '',
         usageLimit: 5,
         cardImage: '',
         availableDiscounts: [{
@@ -138,10 +140,11 @@ const CardOwnerDashboard = () => {
                 </span>
               </div>
               <p>{card.cardType} - {card.cardNetwork} •••• {card.lastFourDigits}</p>
+              <p>Expiry: {card.expiryDate}</p>
               <p>Usage: {card.currentUsage}/{card.usageLimit}</p>
               <p>Rating: ★ {card.rating}/5 ({card.totalTransactions} transactions)</p>
               <div className="discounts">
-                {card.availableDiscounts.map((discount, idx) => (
+                {card.availableDiscounts?.map((discount, idx) => (
                   <div key={idx} className="discount-item">
                     {discount.platform}: {discount.discountPercentage}%
                   </div>
@@ -236,6 +239,18 @@ const CardOwnerDashboard = () => {
               </div>
               
               <div className="form-group">
+                <label>Expiry Date (MM/YY)</label>
+                <input
+                  type="text"
+                  placeholder="MM/YY"
+                  maxLength="5"
+                  value={newCard.expiryDate}
+                  onChange={(e) => setNewCard({...newCard, expiryDate: e.target.value})}
+                  required
+                />
+              </div>
+              
+              <div className="form-group">
                 <label>Card Image (Optional)</label>
                 <ImageUpload 
                   type="card" 
@@ -247,6 +262,8 @@ const CardOwnerDashboard = () => {
                   </div>
                 )}
               </div>
+
+              <h3 style={{ marginTop: '20px' }}>Discount Details</h3>
               <div className="form-group">
                 <label>Platform</label>
                 <select
@@ -259,6 +276,13 @@ const CardOwnerDashboard = () => {
                   <option>Amazon</option>
                   <option>Flipkart</option>
                   <option>Myntra</option>
+                  <option>Swiggy</option>
+                  <option>Zomato</option>
+                  <option>BookMyShow</option>
+                  <option>MakeMyTrip</option>
+                  <option>Nykaa</option>
+                  <option>BigBasket</option>
+                  <option>Other</option>
                 </select>
               </div>
               <div className="form-row">
@@ -286,6 +310,17 @@ const CardOwnerDashboard = () => {
                     required
                   />
                 </div>
+              </div>
+              <div className="form-group">
+                <label>Min Purchase (₹)</label>
+                <input
+                  type="number"
+                  value={newCard.availableDiscounts[0].minPurchase}
+                  onChange={(e) => setNewCard({
+                    ...newCard,
+                    availableDiscounts: [{...newCard.availableDiscounts[0], minPurchase: e.target.value}]
+                  })}
+                />
               </div>
               <div className="form-group">
                 <label>Valid Until</label>
