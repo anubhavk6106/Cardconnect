@@ -9,16 +9,21 @@ CardConnect enables card owners to list their credit/debit cards with available 
 ## ✨ Features
 
 ### For Buyers 🛒
+- Browse 24+ products from Amazon, Flipkart, and Myntra
+- View available bank card discounts for each product
+- Filter products by platform, category, price range, and search
 - Browse available cards with discount information
 - Filter by platform (Amazon, Flipkart, Swiggy, etc.), card network, and bank
-- Real-time product browsing with applicable discounts
+- Request transactions with card owners for discounted purchases
 - Secure payment processing via Razorpay
 - Live chat with card owners
 - Transaction history and savings tracking
 - KYC verification system
 
 ### For Card Owners 💳
-- Add multiple cards with discount details per platform
+- Add cards with basic details (Bank, Type, Network, Last 4 digits, Expiry)
+- Add platform-specific discounts (Amazon, Flipkart, Myntra, Swiggy, Zomato, etc.)
+- Set discount percentages, max discount amounts, and validity periods
 - Set usage limits and availability
 - Track earnings and card performance
 - Manage transaction requests
@@ -80,8 +85,7 @@ CardConnect/
 │   │   ├── Transaction.js
 │   │   ├── Chat.js
 │   │   ├── Notification.js
-│   │   ├── KYC.js
-│   │   └── Product.js
+│   │   └── KYC.js
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── cardRoutes.js
