@@ -3,31 +3,33 @@ const socketIO = require('socket.io');
 let io;
 const userSockets = new Map(); // userId -> socketId mapping
 
-const initializeSocket = (server) => {
+const initializeSocket = (server, allowedOrigin) => {
   io = socketIO(server, {
     cors: {
-      origin: [process.env.FRONTEND_URL, 'http://localhost:5173'],
+      origin: [
+        allowedOrigin,
+        'http://localhost:5173'
+      ],
       methods: ['GET', 'POST'],
       credentials: true
     }
   });
 
   io.on('connection', (socket) => {
-    console.log('New client connected:', socket.id);
+    console.log('🟢 New client connected:', socket.id);
 
-    // User registers their socket
+    // Register user socket
     socket.on('register', (userId) => {
       userSockets.set(userId, socket.id);
-      console.log(`User ${userId} registered with socket ${socket.id}`);
+      console.log(`✅ User ${userId} registered with socket ${socket.id}`);
     });
 
     // Handle disconnect
     socket.on('disconnect', () => {
-      // Remove user from map
       for (let [userId, socketId] of userSockets.entries()) {
         if (socketId === socket.id) {
           userSockets.delete(userId);
-          console.log(`User ${userId} disconnected`);
+          console.log(`🔴 User ${userId} disconnected`);
           break;
         }
       }
@@ -37,19 +39,20 @@ const initializeSocket = (server) => {
   return io;
 };
 
-// Send notification to specific user
+// ✅ Send notification to specific user
 const sendNotificationToUser = (userId, event, data) => {
-  const socketId = userSockets.get(userId.toString());
+  const socketId = userSockets.get(userId?.toString());
   if (socketId && io) {
     io.to(socketId).emit(event, data);
-    console.log(`Notification sent to user ${userId}:`, event);
+    console.log(`📩 Notification sent to user ${userId}: ${event}`);
   }
 };
 
-// Broadcast to all connected clients
+// ✅ Broadcast to all users
 const broadcastNotification = (event, data) => {
   if (io) {
     io.emit(event, data);
+    console.log(`📢 Broadcast event: ${event}`);
   }
 };
 

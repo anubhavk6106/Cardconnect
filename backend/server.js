@@ -19,25 +19,33 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const kycRoutes = require('./routes/kycRoutes');
 
-// Initialize express
+// Initialize express and HTTP server
 const app = express();
 const server = http.createServer(app);
 
-// Connect to MongoDB
+// ✅ Connect to MongoDB
 connectDB();
 
-// Middleware
-app.use(cors());
+// ✅ Define allowed CORS origin dynamically
+const allowedOrigin = process.env.FRONTEND_URL || 'http://localhost:5173';
+
+// ✅ Apply CORS
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true,
+}));
+
+// ✅ Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files for uploads
+// ✅ Serve static files (uploads, etc.)
 app.use('/uploads', express.static('uploads'));
 
-// Initialize Socket.io
-initializeSocket(server);
+// ✅ Initialize Socket.io with proper CORS
+initializeSocket(server, allowedOrigin);
 
-// Routes
+// ✅ API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/cards', cardRoutes);
 app.use('/api/transactions', transactionRoutes);
@@ -51,42 +59,33 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/kyc', kycRoutes);
 
-// Root route
+// ✅ Health check route (for testing deployment)
 app.get('/', (req, res) => {
   res.json({
-    message: 'CardConnect API',
+    message: '🚀 CardConnect API is running successfully!',
     version: '1.0.0',
-    endpoints: {
-      auth: '/api/auth',
-      cards: '/api/cards',
-      transactions: '/api/transactions',
-      admin: '/api/admin',
-      ai: '/api/ai',
-      analytics: '/api/analytics',
-      chat: '/api/chat',
-      kyc: '/api/kyc'
-    }
+    environment: process.env.NODE_ENV || 'development',
   });
 });
 
-// Error handling middleware
+// ✅ Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('❌ Error:', err.stack);
   res.status(500).json({
     message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined,
   });
 });
 
-// 404 handler
+// ✅ 404 route handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
+// ✅ Use Render-assigned PORT
 const PORT = process.env.PORT || 5000;
-
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Socket.io enabled`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`🌐 Allowed Origin: ${allowedOrigin}`);
+  console.log(`⚙️ Environment: ${process.env.NODE_ENV || 'development'}`);
 });

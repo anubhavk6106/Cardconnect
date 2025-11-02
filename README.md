@@ -1,6 +1,12 @@
 # CardConnect 💳
 
-A modern web platform connecting card owners with buyers to facilitate discounted product purchases through card-based transactions.
+[![Node.js](https://img.shields.io/badge/Node.js-v16%2B-green)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green)](https://www.mongodb.com/atlas)
+[![Express](https://img.shields.io/badge/Express-4.18.2-lightgrey)](https://expressjs.com/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-4.8.1-black)](https://socket.io/)
+
+A modern, full-stack web platform connecting card owners with buyers to facilitate discounted product purchases through card-based transactions. Built with the MERN stack (MongoDB, Express.js, React, Node.js) featuring real-time communication, secure payments, and comprehensive analytics.
 
 ## 📋 Overview
 
@@ -41,113 +47,218 @@ CardConnect enables card owners to list their credit/debit cards with available 
 ## 🏗️ Tech Stack
 
 ### Frontend
-- **React 18** with Vite
-- **React Router** for navigation
-- **Axios** for API calls
-- **Socket.io Client** for real-time features
-- **Chart.js** for analytics visualization
-- **CSS3** for responsive styling
+- **React 18.2.0** with **Vite 5.4.21** for fast development and optimized builds
+- **React Router DOM 6.20.1** for client-side routing and navigation
+- **Axios 1.6.2** for HTTP requests and API communication
+- **Socket.io Client 4.8.1** for real-time bidirectional event-based communication
+- **Chart.js 4.5.1** with **React-ChartJS-2 5.3.1** for interactive data visualization
+- **CSS3** with custom responsive styling (no UI framework dependency)
+- **Context API** for global state management (AuthContext)
 
 ### Backend
-- **Node.js** with Express.js
-- **MongoDB Atlas** with Mongoose ODM
-- **JWT** for authentication
-- **bcryptjs** for password hashing
-- **Socket.io** for real-time notifications
-- **Razorpay** for payment gateway
-- **Cloudinary** for image storage
-- **Multer** for file uploads
-- **Nodemailer** for email notifications
+- **Node.js** with **Express.js 4.18.2** REST API framework
+- **MongoDB Atlas** with **Mongoose 8.0.3** ODM for database operations
+- **JWT (jsonwebtoken 9.0.2)** for stateless authentication and authorization
+- **bcryptjs 2.4.3** for secure password hashing with salt
+- **Socket.io 4.8.1** for WebSocket-based real-time notifications and chat
+- **Razorpay 2.9.6** integration for secure payment processing
+- **Cloudinary 1.41.3** for cloud-based image storage and CDN delivery
+- **Multer 1.4.5-lts.1** for handling multipart/form-data file uploads
+- **Nodemailer 6.10.1** for transactional email notifications
+- **Express-validator 7.0.1** for request validation and sanitization
+- **CORS 2.8.5** for cross-origin resource sharing configuration
+
+### Development Tools
+- **Nodemon 3.0.2** for automatic server restarts during development
+- **Concurrently 8.2.2** for running frontend and backend simultaneously
+- **dotenv 16.3.1** for environment variable management
 
 ## 📁 Project Structure
 
 ```
 CardConnect/
-├── backend/
-│   ├── config/
-│   │   ├── database.js          # MongoDB connection
-│   │   ├── cloudinary.js        # Image storage config
-│   │   └── multer.js            # File upload config
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── cardController.js
-│   │   ├── transactionController.js
-│   │   ├── chatController.js
-│   │   ├── notificationController.js
-│   │   ├── adminController.js
-│   │   ├── analyticsController.js
-│   │   ├── kycController.js
-│   │   ├── paymentController.js
-│   │   └── searchController.js
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Card.js
-│   │   ├── Transaction.js
-│   │   ├── Chat.js
-│   │   ├── Notification.js
-│   │   └── KYC.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── cardRoutes.js
-│   │   ├── transactionRoutes.js
-│   │   ├── chatRoutes.js
-│   │   ├── notificationRoutes.js
-│   │   ├── adminRoutes.js
-│   │   ├── analyticsRoutes.js
-│   │   ├── kycRoutes.js
-│   │   ├── payment.js
-│   │   ├── searchRoutes.js
-│   │   ├── uploadRoutes.js
-│   │   └── aiRoutes.js
+├── backend/                      # Node.js/Express backend server
+│   ├── config/                   # Configuration files
+│   │   ├── database.js          # MongoDB Atlas connection setup
+│   │   ├── cloudinary.js        # Cloudinary image storage config
+│   │   └── multer.js            # File upload middleware config
+│   ├── controllers/              # Business logic layer (MVC pattern)
+│   │   ├── authController.js    # User authentication & registration
+│   │   ├── cardController.js    # Card CRUD operations
+│   │   ├── transactionController.js  # Transaction management
+│   │   ├── chatController.js    # Real-time chat functionality
+│   │   ├── notificationController.js # Notification handling
+│   │   ├── adminController.js   # Admin-specific operations
+│   │   ├── analyticsController.js    # Analytics & statistics
+│   │   ├── kycController.js     # KYC verification logic
+│   │   ├── paymentController.js # Razorpay payment integration
+│   │   └── searchController.js  # Search & filtering logic
+│   ├── models/                   # Mongoose schemas & models
+│   │   ├── User.js              # User model (buyer/card_owner/admin roles)
+│   │   ├── Card.js              # Card model with discount details
+│   │   ├── Transaction.js       # Transaction model with status tracking
+│   │   ├── Chat.js              # Chat & message schema
+│   │   ├── Notification.js      # Notification model
+│   │   └── KYC.js               # KYC verification data model
+│   ├── routes/                   # Express route definitions
+│   │   ├── authRoutes.js        # /api/auth endpoints
+│   │   ├── cardRoutes.js        # /api/cards endpoints
+│   │   ├── transactionRoutes.js # /api/transactions endpoints
+│   │   ├── chatRoutes.js        # /api/chat endpoints
+│   │   ├── notificationRoutes.js # /api/notifications endpoints
+│   │   ├── adminRoutes.js       # /api/admin endpoints
+│   │   ├── analyticsRoutes.js   # /api/analytics endpoints
+│   │   ├── kycRoutes.js         # /api/kyc endpoints
+│   │   ├── payment.js           # /api/payment endpoints
+│   │   ├── searchRoutes.js      # /api/search endpoints
+│   │   ├── uploadRoutes.js      # /api/upload endpoints
+│   │   └── aiRoutes.js          # /api/ai endpoints (future AI features)
 │   ├── middleware/
-│   │   └── auth.js              # JWT verification
-│   ├── services/
-│   │   ├── socketService.js     # Real-time notifications
-│   │   ├── emailService.js      # Email notifications
-│   │   └── aiService.js         # AI features
-│   ├── scripts/
-│   │   ├── createAdmin.js       # Create admin user
-│   │   ├── listUsers.js         # List all users
-│   │   └── seed.js              # Seed sample data
-│   ├── server.js
-│   └── package.json
+│   │   └── auth.js              # JWT token verification & role-based access
+│   ├── services/                 # External service integrations
+│   │   ├── socketService.js     # Socket.io server & event handlers
+│   │   ├── emailService.js      # Nodemailer email service
+│   │   └── aiService.js         # AI/ML service integration
+│   ├── scripts/                  # Utility scripts
+│   │   ├── createAdmin.js       # Script to create admin user
+│   │   ├── listUsers.js         # Script to list all users
+│   │   └── seed.js              # Database seeding script
+│   ├── uploads/                  # Local file storage (temp)
+│   ├── .env                      # Environment variables (not in git)
+│   ├── server.js                 # Express server entry point
+│   └── package.json              # Backend dependencies
 │
-├── frontend/
+├── frontend/                     # React/Vite frontend application
+│   ├── dist/                     # Production build output
 │   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── PrivateRoute.jsx
-│   │   │   ├── NotificationBell.jsx
-│   │   │   ├── ImageUpload.jsx
-│   │   │   ├── PaymentModal.jsx
-│   │   │   └── VerifiedBadge.jsx
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── Register.jsx
-│   │   │   ├── BuyerDashboard.jsx
-│   │   │   ├── CardOwnerDashboard.jsx
-│   │   │   ├── AdminDashboard.jsx
-│   │   │   ├── AnalyticsDashboard.jsx
-│   │   │   ├── BrowseProducts.jsx
-│   │   │   ├── ProductBrowseEnhanced.jsx
-│   │   │   ├── TransactionHistory.jsx
-│   │   │   ├── ChatPage.jsx
-│   │   │   ├── KYCVerification.jsx
-│   │   │   ├── KYCAdminPanel.jsx
-│   │   │   └── ProfileSettings.jsx
+│   │   ├── components/          # Reusable React components
+│   │   │   ├── Navbar.jsx       # Navigation bar with auth state
+│   │   │   ├── Footer.jsx       # Footer component
+│   │   │   ├── PrivateRoute.jsx # Protected route wrapper (HOC)
+│   │   │   ├── NotificationBell.jsx # Real-time notification bell
+│   │   │   ├── ImageUpload.jsx  # Image upload component
+│   │   │   ├── PaymentModal.jsx # Razorpay payment modal
+│   │   │   └── VerifiedBadge.jsx # KYC verification badge
+│   │   ├── pages/               # Page-level components (routes)
+│   │   │   ├── Home.jsx         # Landing page
+│   │   │   ├── Login.jsx        # User login
+│   │   │   ├── Register.jsx     # User registration
+│   │   │   ├── BuyerDashboard.jsx       # Buyer main dashboard
+│   │   │   ├── CardOwnerDashboard.jsx   # Card owner dashboard
+│   │   │   ├── AdminDashboard.jsx       # Admin control panel
+│   │   │   ├── AnalyticsDashboard.jsx   # Analytics & charts
+│   │   │   ├── BrowseProducts.jsx       # Product browsing page
+│   │   │   ├── ProductBrowseEnhanced.jsx # Enhanced product browser
+│   │   │   ├── TransactionHistory.jsx   # Transaction list & details
+│   │   │   ├── ChatPage.jsx     # Real-time chat interface
+│   │   │   ├── KYCVerification.jsx      # KYC submission form
+│   │   │   ├── KYCAdminPanel.jsx        # KYC approval panel (admin)
+│   │   │   └── ProfileSettings.jsx      # User profile management
 │   │   ├── context/
-│   │   │   └── AuthContext.jsx
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── App.css
-│   ├── index.html
-│   ├── vite.config.js
-│   └── package.json
+│   │   │   └── AuthContext.jsx  # Global auth state (Context API)
+│   │   ├── assets/              # Static assets (images, icons)
+│   │   ├── styles/              # CSS modules
+│   │   ├── App.jsx              # Root component & routing
+│   │   ├── App.css              # Global styles
+│   │   ├── App.design.css       # Design system styles
+│   │   ├── index.css            # Base styles
+│   │   └── main.jsx             # React entry point
+│   ├── .env                      # Frontend environment variables
+│   ├── index.html                # HTML template
+│   ├── vite.config.js            # Vite configuration
+│   └── package.json              # Frontend dependencies
 │
-└── README.md
+├── .gitignore                    # Git ignore rules
+├── package.json                  # Root package.json for concurrent scripts
+└── README.md                     # Project documentation
 ```
+
+## 🗄️ Database Schema
+
+### User Model
+- **Fields**: name, email, password (hashed), role, phone, address, profileImage
+- **Verification**: isVerified, status (none/pending/under_review/approved/rejected), level, kycId
+- **Stats**: totalTransactions, totalSavings, totalEarnings
+- **Roles**: buyer, card_owner, admin
+
+### Card Model
+- **Fields**: owner (ref: User), bankName, cardType, cardNetwork, lastFourDigits, expiryDate, cardImage
+- **Discounts**: Array of platform-specific discounts (platform, discountPercentage, maxDiscount, minPurchase, validUntil)
+- **Usage**: isAvailable, usageLimit, currentUsage, rating, totalTransactions
+- **Networks**: Visa, Mastercard, RuPay, American Express
+
+### Transaction Model
+- **Relationships**: buyer (ref: User), cardOwner (ref: User), card (ref: Card)
+- **Details**: productName, productPrice, platform, requestedDiscount
+- **Payment**: paymentAmount, paymentStatus, razorpayOrderId, razorpayPaymentId
+- **Status**: pending, accepted, rejected, completed, cancelled
+- **Tracking**: commission, orderPlaced, timestamps
+
+### Chat Model
+- **Participants**: buyer, cardOwner (refs to User)
+- **Messages**: Array of {sender, message, timestamp, isRead}
+- **Metadata**: lastMessage, unreadCount, transaction (ref)
+
+### KYC Model
+- **User**: userId (ref: User)
+- **Documents**: aadharNumber, panNumber, documentImages
+- **Status**: pending, under_review, approved, rejected
+- **Verification**: verifiedBy (ref: User), verificationDate, comments
+
+### Notification Model
+- **Fields**: user (ref: User), type, title, message, isRead, link
+- **Types**: transaction, message, kyc, system
+
+## 🎯 Core Features Breakdown
+
+### 1. Authentication & Authorization
+- JWT-based stateless authentication with httpOnly cookies
+- Role-based access control (RBAC) for buyer/card_owner/admin
+- Password hashing using bcrypt with salt rounds
+- Protected routes with PrivateRoute HOC component
+- Session persistence with localStorage token management
+
+### 2. Real-time Communication
+- **Socket.io Integration**: Bidirectional WebSocket communication
+- **Live Chat**: One-on-one messaging between buyers and card owners
+- **Notifications**: Real-time push notifications for transactions, messages, KYC updates
+- **Presence System**: Online/offline status tracking
+- **Event-driven**: Socket events for new transactions, messages, status updates
+
+### 3. Payment Processing
+- **Razorpay Integration**: Secure payment gateway with test/live modes
+- **Order Creation**: Server-side order generation with amount verification
+- **Payment Verification**: Signature verification for transaction security
+- **Commission Split**: Automatic commission calculation and distribution
+- **Transaction Tracking**: Complete payment lifecycle management
+
+### 4. File Upload & Storage
+- **Cloudinary Integration**: Cloud-based image storage with CDN
+- **Multer Middleware**: Handles multipart/form-data file uploads
+- **Image Validation**: File type and size validation
+- **Automatic Optimization**: Image compression and transformation
+- **Upload Types**: Profile images, card images, KYC documents
+
+### 5. KYC Verification System
+- **Document Upload**: Aadhar and PAN document submission
+- **Admin Review**: Dedicated admin panel for verification
+- **Status Tracking**: none → pending → under_review → approved/rejected
+- **Verification Levels**: none, basic, verified, premium
+- **Badge System**: Visual verification badges on profiles
+
+### 6. Analytics & Reporting
+- **Chart.js Visualization**: Interactive charts and graphs
+- **Revenue Tracking**: Total revenue and transaction count
+- **User Growth**: Time-series user registration data
+- **Platform Performance**: Transaction breakdown by platform
+- **Card Analytics**: Top performing cards and success rates
+
+### 7. Search & Filtering
+- **Multi-criteria Search**: Filter by platform, bank, card network, price range
+- **Product Search**: Search across 24+ products from multiple platforms
+- **Card Discovery**: Browse available cards with active discounts
+- **Real-time Filtering**: Instant results with client-side filtering
+- **Sort Options**: Sort by discount, rating, popularity
 
 ## 🚀 Getting Started
 
@@ -346,21 +457,133 @@ npm run preview    # Preview production build
 - Top performing cards and users
 - Platform-wise transaction breakdown
 
+## 🔄 Development Workflow
+
+### Running Both Servers Concurrently
+```bash
+# From root directory
+npm run dev
+# Runs both backend (port 5000) and frontend (port 5173) simultaneously
+```
+
+### Running Servers Separately
+```bash
+# Terminal 1 - Backend
+cd backend
+npm run dev
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+```
+
+### Database Management
+```bash
+# Seed sample data (products, cards, users)
+cd backend
+npm run seed
+
+# Create admin user
+node scripts/createAdmin.js
+
+# List all users
+node scripts/listUsers.js
+```
+
+## 🏗️ Architecture Overview
+
+### Backend Architecture
+- **MVC Pattern**: Separation of concerns (Models, Views, Controllers)
+- **RESTful API**: Standard HTTP methods (GET, POST, PUT, DELETE)
+- **Middleware Chain**: CORS → JSON Parser → Auth → Route Handlers
+- **Error Handling**: Centralized error handling middleware
+- **Service Layer**: External service integrations (Socket, Email, Payment)
+
+### Frontend Architecture
+- **Component-based**: Modular React components with single responsibility
+- **Context API**: Global authentication state management
+- **React Router**: Client-side routing with protected routes
+- **Custom Hooks**: Reusable logic (useAuth, useSocket, useNotifications)
+- **Responsive Design**: Mobile-first CSS with flexbox/grid layouts
+
+### Real-time Communication Flow
+```
+Client (Socket.io Client) ←→ Server (Socket.io Server) ←→ MongoDB
+     ↓                              ↓
+Emit Events                    Broadcast to Rooms
+(new-message, transaction)     (user-specific notifications)
+```
+
+### Payment Flow
+```
+1. Buyer initiates transaction → Backend creates Razorpay order
+2. Frontend opens Razorpay modal → User completes payment
+3. Razorpay returns payment details → Backend verifies signature
+4. Payment success → Update transaction status → Notify card owner
+5. Commission calculation → Update user stats → Send emails
+```
+
+## 🧪 Testing
+
+### Manual Testing Checklist
+- [ ] User registration and login flow
+- [ ] Card creation with discount details
+- [ ] Product browsing and filtering
+- [ ] Transaction initiation and payment
+- [ ] Real-time chat messaging
+- [ ] Notification delivery
+- [ ] KYC document upload and approval
+- [ ] Admin user management
+- [ ] Analytics dashboard data accuracy
+
+### API Testing
+Use tools like Postman or Thunder Client:
+```bash
+# Test authentication
+POST http://localhost:5000/api/auth/register
+POST http://localhost:5000/api/auth/login
+
+# Test protected routes (add JWT token in Authorization header)
+GET http://localhost:5000/api/cards
+POST http://localhost:5000/api/transactions
+```
+
 ## 🐛 Troubleshooting
 
 ### CORS Issues
-- Ensure `FRONTEND_URL` in backend `.env` matches your frontend URL
-- Check Socket.io CORS configuration in `socketService.js`
+- Ensure `FRONTEND_URL` in backend `.env` matches your frontend URL (http://localhost:5173)
+- Check Socket.io CORS configuration in `services/socketService.js`
+- Verify `cors()` middleware is applied before routes in `server.js`
 
-### Database Connection
-- Verify MongoDB Atlas connection string
-- Check IP whitelist in MongoDB Atlas
-- Ensure network access permissions
+### Database Connection Issues
+- Verify MongoDB Atlas connection string format: `mongodb+srv://username:password@cluster.mongodb.net/database`
+- Check IP whitelist in MongoDB Atlas (add 0.0.0.0/0 for development)
+- Ensure network access permissions in Atlas dashboard
+- Test connection with MongoDB Compass
 
 ### Payment Issues
-- Verify Razorpay API keys
-- Check test mode vs live mode
-- Ensure webhook configuration
+- Verify Razorpay API keys (Key ID and Key Secret)
+- Check test mode vs live mode (use test keys for development)
+- Ensure webhook URLs are configured in Razorpay dashboard
+- Check browser console for Razorpay script loading errors
+
+### Socket.io Connection Issues
+- Check CORS configuration allows frontend origin
+- Verify Socket.io client version matches server version (4.8.1)
+- Check browser console for WebSocket connection errors
+- Ensure server is running before connecting client
+
+### Image Upload Issues
+- Verify Cloudinary credentials (Cloud Name, API Key, API Secret)
+- Check file size limits in Multer configuration
+- Ensure `uploads/` directory exists with write permissions
+- Verify file type validation (only images allowed)
+
+### Environment Variable Issues
+- Ensure `.env` files exist in both backend and frontend directories
+- Restart servers after changing `.env` files
+- Frontend variables must start with `VITE_` prefix
+- Never commit `.env` files to version control
 
 ## 📝 API Documentation
 
@@ -395,9 +618,96 @@ Base URL: `http://localhost:5000/api`
 - `PUT /admin/users/:id/status` - Update user status
 - `GET /admin/transactions` - Get all transactions
 
+## 🚀 Deployment
+
+### Backend Deployment (Railway/Render/Heroku)
+1. Push code to GitHub repository
+2. Connect repository to deployment platform
+3. Add all environment variables from `.env`
+4. Set build command: `cd backend && npm install`
+5. Set start command: `cd backend && npm start`
+6. Update CORS to allow production frontend URL
+
+### Frontend Deployment (Vercel/Netlify)
+1. Connect repository to deployment platform
+2. Set build command: `cd frontend && npm run build`
+3. Set output directory: `frontend/dist`
+4. Add environment variables (VITE_API_URL, VITE_RAZORPAY_KEY_ID)
+5. Configure redirects for React Router (SPA)
+
+### Production Checklist
+- [ ] Change default admin password
+- [ ] Use production MongoDB cluster
+- [ ] Switch Razorpay to live mode
+- [ ] Enable HTTPS/SSL certificates
+- [ ] Set NODE_ENV=production
+- [ ] Configure proper CORS origins
+- [ ] Set up error logging (e.g., Sentry)
+- [ ] Configure CDN for static assets
+- [ ] Set up database backups
+- [ ] Implement rate limiting
+
+## 🔐 Security Best Practices
+
+- ✅ JWT tokens stored in httpOnly cookies (prevents XSS)
+- ✅ Password hashing with bcrypt (10 salt rounds)
+- ✅ MongoDB injection prevention with Mongoose
+- ✅ CORS properly configured
+- ✅ Input validation and sanitization (express-validator)
+- ✅ File upload validation (type, size limits)
+- ✅ Environment variables for sensitive data
+- ✅ Secure payment processing via Razorpay
+- 🔲 Rate limiting (TODO: implement in production)
+- 🔲 Helmet.js for HTTP headers (TODO: add)
+
+## 📈 Performance Optimizations
+
+### Backend
+- Database indexing on frequently queried fields (email, userId)
+- Efficient MongoDB queries with projection and lean()
+- Connection pooling for database connections
+- Static file serving with proper caching headers
+
+### Frontend
+- Vite for fast development and optimized production builds
+- Code splitting with React.lazy() (TODO)
+- Image optimization via Cloudinary CDN
+- CSS optimization and minification
+- React Context API for minimal re-renders
+
+## 🛣️ Roadmap & Future Enhancements
+
+### Planned Features
+- [ ] **AI-powered Recommendations**: Smart card suggestions based on purchase history
+- [ ] **Multi-language Support**: Internationalization (i18n)
+- [ ] **Mobile Apps**: React Native iOS/Android apps
+- [ ] **Advanced Analytics**: ML-based insights and predictions
+- [ ] **Referral System**: User referral program with rewards
+- [ ] **Automated Testing**: Jest/Mocha unit tests, Cypress E2E tests
+- [ ] **API Rate Limiting**: Express rate limiter middleware
+- [ ] **Caching Layer**: Redis for session and data caching
+- [ ] **Email Templates**: Rich HTML email templates
+- [ ] **Push Notifications**: FCM for mobile push notifications
+- [ ] **Advanced Search**: Elasticsearch integration
+- [ ] **Invoice Generation**: Automated PDF invoices
+
+### Current Limitations
+- No automated testing suite
+- Single server deployment (no load balancing)
+- Limited to Indian payment gateway (Razorpay)
+- No data export functionality
+- Manual KYC verification (no OCR)
+
 ## 🤝 Contributing
 
 This is a private project. For any questions or suggestions, please contact the project maintainer.
+
+### Development Guidelines
+- Follow existing code structure and naming conventions
+- Write descriptive commit messages
+- Test changes thoroughly before committing
+- Update documentation for new features
+- Follow ESLint rules and code formatting standards
 
 ## 📄 License
 
@@ -407,10 +717,43 @@ Private and Confidential
 
 Developed as a full-stack MERN application for connecting card owners with buyers for discounted purchases.
 
+**Tech Stack Summary**: MongoDB Atlas + Express.js + React 18 + Node.js + Socket.io + Razorpay + Cloudinary
+
 ## 📞 Support
 
 For support and queries, contact the admin at: admin@cardconnect.com
 
+## 📚 Additional Resources
+
+- [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
+- [Express.js Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)
+- [React Documentation](https://react.dev/)
+- [Socket.io Documentation](https://socket.io/docs/v4/)
+- [Razorpay Integration Guide](https://razorpay.com/docs/)
+- [Cloudinary Documentation](https://cloudinary.com/documentation)
+
 ---
 
-**Note:** Remember to change default admin password and keep all API keys secure. Never commit `.env` files to version control.
+**⚠️ Important Security Notes:**
+- Change default admin password immediately after setup
+- Keep all API keys and secrets secure
+- Never commit `.env` files to version control
+- Use environment-specific configurations
+- Regularly update dependencies for security patches
+- Enable 2FA on all third-party service accounts
+
+**💡 Quick Start Reminder:**
+```bash
+# Install all dependencies
+npm run install:all
+
+# Start both servers
+npm run dev
+
+# Backend: http://localhost:5000
+# Frontend: http://localhost:5173
+```
+
+---
+
+*Last Updated: November 2025 | Version 1.0.0*
