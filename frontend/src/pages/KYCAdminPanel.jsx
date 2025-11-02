@@ -298,12 +298,12 @@ const KYCAdminPanel = () => {
                     <div className="document-images">
                       <div className="doc-image">
                         <p>Front Side</p>
-                        <img src={`http://localhost:5000/${selectedSubmission.documents.idProof.frontImage}`} alt="ID Front" />
+                        <img src={`${import.meta.env.VITE_API_URL}/${selectedSubmission.documents.idProof.frontImage}`} alt="ID Front" />
                       </div>
                       {selectedSubmission.documents.idProof.backImage && (
                         <div className="doc-image">
                           <p>Back Side</p>
-                          <img src={`http://localhost:5000/${selectedSubmission.documents.idProof.backImage}`} alt="ID Back" />
+                          <img src={`${import.meta.env.VITE_API_URL}/${selectedSubmission.documents.idProof.backImage}`} alt="ID Back" />
                         </div>
                       )}
                     </div>
@@ -313,7 +313,7 @@ const KYCAdminPanel = () => {
                     <h4>Address Proof ({selectedSubmission.documents.addressProof.type})</h4>
                     <div className="document-images">
                       <div className="doc-image">
-                        <img src={`http://localhost:5000/${selectedSubmission.documents.addressProof.image}`} alt="Address Proof" />
+                        <img src={`${import.meta.env.VITE_API_URL}/${selectedSubmission.documents.addressProof.image}`} alt="Address Proof" />
                       </div>
                     </div>
                   </div>
@@ -322,7 +322,7 @@ const KYCAdminPanel = () => {
                     <h4>Selfie</h4>
                     <div className="document-images">
                       <div className="doc-image">
-                        <img src={`http://localhost:5000/${selectedSubmission.documents.selfie}`} alt="Selfie" />
+                        <img src={`${import.meta.env.VITE_API_URL}/${selectedSubmission.documents.selfie}`} alt="Selfie" />
                       </div>
                     </div>
                   </div>

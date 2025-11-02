@@ -127,7 +127,7 @@ const CardOwnerDashboard = () => {
               {card.cardImage && (
                 <div className="card-image">
                   <img 
-                    src={card.cardImage.startsWith('http') ? card.cardImage : `http://localhost:5000${card.cardImage}`} 
+                    src={card.cardImage.startsWith('http') ? card.cardImage : `${import.meta.env.VITE_API_URL}${card.cardImage}`} 
                     alt={card.bankName}
                     style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '8px 8px 0 0' }}
                   />

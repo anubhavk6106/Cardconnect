@@ -41,7 +41,7 @@ const NotificationBell = () => {
   }, [])
 
   const initializeSocket = () => {
-    socketRef.current = io('http://localhost:5000', {
+    socketRef.current = io(import.meta.env.VITE_SOCKET_URL, {
       transports: ['websocket'],  // ensure WS only
       reconnectionAttempts: 5,
       reconnectionDelay: 3000,

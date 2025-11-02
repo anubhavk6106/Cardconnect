@@ -101,7 +101,7 @@ const ProfileSettings = () => {
                 <img 
                   src={userData.profileImage.startsWith('http') 
                     ? userData.profileImage 
-                    : `http://localhost:5000${userData.profileImage}`
+                    : `${import.meta.env.VITE_API_URL}${userData.profileImage}`
                   } 
                   alt="Profile" 
                 />
