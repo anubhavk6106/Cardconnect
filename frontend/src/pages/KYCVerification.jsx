@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import '../styles/KYCVerification.css';
 
 const KYCVerification = () => {
@@ -30,7 +30,7 @@ const KYCVerification = () => {
 
   const fetchKYCStatus = async () => {
     try {
-      const { data } = await axios.get('/api/kyc/my-kyc');
+      const { data } = await api.get('/api/kyc/my-kyc');
       setKycStatus(data.data);
       setLoading(false);
     } catch (error) {
@@ -101,7 +101,7 @@ const KYCVerification = () => {
       submitData.append('addressProof', files.addressProof);
       submitData.append('selfie', files.selfie);
 
-      const { data } = await axios.post('/api/kyc/submit', submitData, {
+      const { data } = await api.post('/api/kyc/submit', submitData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

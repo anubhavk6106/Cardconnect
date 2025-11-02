@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
-import axios from 'axios'
+import api from '../api/axios'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const Login = () => {
     setLoading(true)
 
     try {
-      const { data } = await axios.post('/api/auth/login', formData)
+      const { data } = await api.post('/api/auth/login', formData)
       login(data)
       
       // Redirect based on role

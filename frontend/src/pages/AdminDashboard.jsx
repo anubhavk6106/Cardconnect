@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api/axios'
 
 const AdminDashboard = () => {
   const navigate = useNavigate()
@@ -16,9 +16,9 @@ const AdminDashboard = () => {
   const fetchAdminData = async () => {
     try {
       const [statsRes, usersRes, transactionsRes] = await Promise.all([
-        axios.get('/api/admin/stats'),
-        axios.get('/api/admin/users'),
-        axios.get('/api/admin/transactions')
+        api.get('/api/admin/stats'),
+        api.get('/api/admin/users'),
+        api.get('/api/admin/transactions')
       ])
       
       setStats(statsRes.data)
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
 
   const handleToggleUserStatus = async (userId, currentStatus) => {
     try {
-      await axios.put(`/api/admin/users/${userId}`, { isActive: !currentStatus })
+      await api.put(`/api/admin/users/${userId}`, { isActive: !currentStatus })
       fetchAdminData()
     } catch (error) {
       alert('Failed to update user status')

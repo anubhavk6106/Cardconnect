@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useRef } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import axios from 'axios'
+import api from '../api/axios'
 import { io } from 'socket.io-client'
 
 const NotificationBell = () => {
@@ -80,7 +80,7 @@ const NotificationBell = () => {
 
   const fetchNotifications = async () => {
     try {
-      const { data } = await axios.get('/api/notifications')
+      const { data } = await api.get('/api/notifications')
       setNotifications(data)
       setUnreadCount(data.filter(n => !n.isRead).length)
     } catch (error) {
@@ -90,7 +90,7 @@ const NotificationBell = () => {
 
   const markAsRead = async (notificationId) => {
     try {
-      await axios.put(`/api/notifications/${notificationId}/read`)
+      await api.put(`/api/notifications/${notificationId}/read`)
       fetchNotifications()
     } catch (error) {
       console.error('Error marking notification as read:', error)
@@ -99,7 +99,7 @@ const NotificationBell = () => {
 
   const markAllAsRead = async () => {
     try {
-      await axios.put('/api/notifications/read-all')
+      await api.put('/api/notifications/read-all')
       fetchNotifications()
     } catch (error) {
       console.error('Error marking all as read:', error)
@@ -109,7 +109,7 @@ const NotificationBell = () => {
   const deleteNotification = async (notificationId, e) => {
     e.stopPropagation()
     try {
-      await axios.delete(`/api/notifications/${notificationId}`)
+      await api.delete(`/api/notifications/${notificationId}`)
       fetchNotifications()
     } catch (error) {
       console.error('Error deleting notification:', error)

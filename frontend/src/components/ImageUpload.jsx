@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import './ImageUpload.css';
 
 const ImageUpload = ({ type = 'profile', onUploadSuccess }) => {
@@ -62,7 +62,7 @@ const ImageUpload = ({ type = 'profile', onUploadSuccess }) => {
       }
 
       const endpoint = type === 'profile' ? '/api/upload/profile' : '/api/upload/card';
-      const { data } = await axios.post(endpoint, formData, {
+      const { data } = await api.post(endpoint, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`,

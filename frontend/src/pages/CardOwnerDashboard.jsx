@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import ImageUpload from '../components/ImageUpload'
-import axios from 'axios'
+import api from '../api/axios'
 
 const CardOwnerDashboard = () => {
   const { user } = useContext(AuthContext)
@@ -33,8 +33,8 @@ const CardOwnerDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const [cardsRes, transactionsRes] = await Promise.all([
-        axios.get('/api/cards/myCards'),
-        axios.get('/api/transactions')
+        api.get('/api/cards/myCards'),
+        api.get('/api/transactions')
       ])
       
       setMyCards(cardsRes.data)
@@ -49,7 +49,7 @@ const CardOwnerDashboard = () => {
   const handleAddCard = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('/api/cards', newCard)
+      await api.post('/api/cards', newCard)
       alert('Card added successfully!')
       setShowAddCard(false)
       setNewCard({
@@ -76,7 +76,7 @@ const CardOwnerDashboard = () => {
 
   const handleRespondToTransaction = async (transactionId, status) => {
     try {
-      await axios.put(`/api/transactions/${transactionId}/respond`, { status })
+      await api.put(`/api/transactions/${transactionId}/respond`, { status })
       alert(`Transaction ${status}!`)
       fetchDashboardData()
     } catch (error) {

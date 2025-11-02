@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react'
-import axios from 'axios'
 
 export const AuthContext = createContext()
 
@@ -11,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     const userInfo = localStorage.getItem('userInfo')
     if (userInfo) {
       setUser(JSON.parse(userInfo))
-      axios.defaults.headers.common['Authorization'] = `Bearer ${JSON.parse(userInfo).token}`
+      localStorage.setItem('token', JSON.parse(userInfo).token)
     }
     setLoading(false)
   }, [])
@@ -19,13 +18,13 @@ export const AuthProvider = ({ children }) => {
   const login = (userData) => {
     setUser(userData)
     localStorage.setItem('userInfo', JSON.stringify(userData))
-    axios.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
+    localStorage.setItem('token', userData.token)
   }
 
   const logout = () => {
     setUser(null)
     localStorage.removeItem('userInfo')
-    delete axios.defaults.headers.common['Authorization']
+    localStorage.removeItem('token')
   }
 
   return (

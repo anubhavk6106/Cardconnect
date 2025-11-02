@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import '../styles/KYCAdminPanel.css';
 
 const KYCAdminPanel = () => {
@@ -24,8 +24,8 @@ const KYCAdminPanel = () => {
     try {
       const params = filter !== 'all' ? `?status=${filter}` : '';
       const [submissionsRes, statsRes] = await Promise.all([
-        axios.get(`/api/kyc/all${params}`),
-        axios.get('/api/kyc/stats')
+        api.get(`/api/kyc/all${params}`),
+        api.get('/api/kyc/stats')
       ]);
 
       setSubmissions(submissionsRes.data.data);
@@ -39,7 +39,7 @@ const KYCAdminPanel = () => {
 
   const viewSubmission = async (id) => {
     try {
-      const { data } = await axios.get(`/api/kyc/${id}`);
+      const { data } = await api.get(`/api/kyc/${id}`);
       setSelectedSubmission(data.data);
       setReviewForm({
         status: 'approved',
@@ -55,7 +55,7 @@ const KYCAdminPanel = () => {
 
   const markUnderReview = async (id) => {
     try {
-      await axios.put(`/api/kyc/${id}/under-review`);
+      await api.put(`/api/kyc/${id}/under-review`);
       alert('Marked as under review');
       fetchData();
     } catch (error) {
@@ -75,7 +75,7 @@ const KYCAdminPanel = () => {
     setReviewing(true);
 
     try {
-      await axios.put(`/api/kyc/${selectedSubmission._id}/review`, reviewForm);
+      await api.put(`/api/kyc/${selectedSubmission._id}/review`, reviewForm);
       alert(`KYC ${reviewForm.status} successfully`);
       setSelectedSubmission(null);
       fetchData();

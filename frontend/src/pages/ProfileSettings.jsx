@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import ImageUpload from '../components/ImageUpload';
 import VerifiedBadge from '../components/VerifiedBadge';
-import axios from 'axios';
+import api from '../api/axios';
 import './ProfileSettings.css';
 
 const ProfileSettings = () => {
@@ -32,7 +32,7 @@ const ProfileSettings = () => {
 
   const fetchKYCStatus = async () => {
     try {
-      const { data } = await axios.get('/api/kyc/my-kyc');
+      const { data } = await api.get('/api/kyc/my-kyc');
       setKycStatus(data.data);
     } catch (error) {
       console.error('Error fetching KYC status:', error);
@@ -75,7 +75,7 @@ const ProfileSettings = () => {
     setError('');
 
     try {
-      const { data } = await axios.put('/api/auth/profile', {
+      const { data } = await api.put('/api/auth/profile', {
         name: userData.name,
       });
 

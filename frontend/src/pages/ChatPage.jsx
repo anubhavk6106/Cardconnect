@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import axios from 'axios';
+import api from '../api/axios';
 import io from 'socket.io-client';
 import '../styles/ChatPage.css';
 
@@ -57,7 +57,7 @@ const ChatPage = () => {
 
   const fetchChats = async () => {
     try {
-      const { data } = await axios.get('/api/chat');
+      const { data } = await api.get('/api/chat');
       setChats(data.data);
       setLoading(false);
     } catch (error) {
@@ -69,7 +69,7 @@ const ChatPage = () => {
   const selectChat = async (chat) => {
     setSelectedChat(chat);
     try {
-      const { data } = await axios.get(`/api/chat/${chat._id}`);
+      const { data } = await api.get(`/api/chat/${chat._id}`);
       setMessages(data.data.messages || []);
       // Mark messages as read
       markAsRead(chat._id);
@@ -80,7 +80,7 @@ const ChatPage = () => {
 
   const markAsRead = async (chatId) => {
     try {
-      await axios.put(`/api/chat/${chatId}/read`);
+      await api.put(`/api/chat/${chatId}/read`);
       fetchChats(); // Refresh to update unread counts
     } catch (error) {
       console.error('Error marking as read:', error);
@@ -94,7 +94,7 @@ const ChatPage = () => {
 
     setSending(true);
     try {
-      const { data } = await axios.post(`/api/chat/${selectedChat._id}/messages`, {
+      const { data } = await api.post(`/api/chat/${selectedChat._id}/messages`, {
         content: newMessage
       });
 
@@ -116,7 +116,7 @@ const ChatPage = () => {
   const fetchAvailableUsers = async () => {
     try {
       // Fetch card owners and buyers for chat
-      const { data: cardsData } = await axios.get('/api/cards');
+      const { data: cardsData } = await api.get('/api/cards');
       
       // Get unique card owners
       const cardOwners = cardsData
@@ -134,7 +134,7 @@ const ChatPage = () => {
 
   const startNewChat = async (userId) => {
     try {
-      const { data } = await axios.post('/api/chat/create', {
+      const { data } = await api.post('/api/chat/create', {
         participantId: userId
       });
       

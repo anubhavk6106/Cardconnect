@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api/axios'
 import './BrowseProducts.css'
 
 /**
@@ -397,7 +397,7 @@ const BrowseProducts = () => {
   const fetchData = async () => {
     try {
       // Fetch all cards to show discounts
-      const { data: cardsData } = await axios.get('/api/cards')
+      const { data: cardsData } = await api.get('/api/cards')
       setAllCards(cardsData)
       
       // Set sample products
@@ -465,7 +465,7 @@ const BrowseProducts = () => {
     
     // Fetch cards and filter to show only those with discounts for this product's platform
     try {
-      const { data } = await axios.get('/api/cards')
+      const { data } = await api.get('/api/cards')
       // Filter to only show cards that have discounts for this product's platform
       const cardsWithDiscountsForPlatform = data.filter(card => 
         card.isAvailable && 
@@ -501,7 +501,7 @@ const BrowseProducts = () => {
 
     setSubmitting(true)
     try {
-      await axios.post('/api/transactions', {
+      await api.post('/api/transactions', {
         cardId: selectedCard,
         product: {
           name: selectedProduct.name,

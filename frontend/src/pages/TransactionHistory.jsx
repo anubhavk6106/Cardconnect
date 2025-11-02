@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import PaymentModal from '../components/PaymentModal'
-import axios from 'axios'
+import api from '../api/axios'
 
 const TransactionHistory = () => {
   const { user } = useContext(AuthContext)
@@ -16,7 +16,7 @@ const TransactionHistory = () => {
 
   const fetchTransactions = async () => {
     try {
-      const { data } = await axios.get('/api/transactions')
+      const { data } = await api.get('/api/transactions')
       setTransactions(data)
       setLoading(false)
     } catch (error) {

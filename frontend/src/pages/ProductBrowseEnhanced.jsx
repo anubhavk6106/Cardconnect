@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api/axios'
 
 const ProductBrowseEnhanced = () => {
   const [cards, setCards] = useState([])
@@ -33,7 +33,7 @@ const ProductBrowseEnhanced = () => {
 
   const fetchFilterOptions = async () => {
     try {
-      const { data } = await axios.get('/api/search/filters')
+      const { data } = await api.get('/api/search/filters')
       setFilterOptions(data)
     } catch (error) {
       console.error('Error fetching filter options:', error)
@@ -53,7 +53,7 @@ const ProductBrowseEnhanced = () => {
         if (!value) params.delete(key)
       }
 
-      const { data } = await axios.get(`/api/search/cards?${params}`)
+      const { data } = await api.get(`/api/search/cards?${params}`)
       setCards(data.cards)
       setPagination({
         currentPage: data.currentPage,

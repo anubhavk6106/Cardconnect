@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import axios from 'axios'
+import api from '../api/axios'
 
 const BuyerDashboard = () => {
   const { user } = useContext(AuthContext)
@@ -28,9 +28,9 @@ const BuyerDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       const [cardsRes, transactionsRes, recsRes] = await Promise.all([
-        axios.get('/api/cards'),
-        axios.get('/api/transactions'),
-        axios.get('/api/ai/recommendations')
+        api.get('/api/cards'),
+        api.get('/api/transactions'),
+        api.get('/api/ai/recommendations')
       ])
       
       setCards(cardsRes.data)
@@ -63,7 +63,7 @@ const BuyerDashboard = () => {
   const handleSubmitTransaction = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('/api/transactions', {
+      await api.post('/api/transactions', {
         cardId: selectedCard._id,
         product: {
           ...productDetails,

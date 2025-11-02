@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -60,14 +60,14 @@ const AnalyticsDashboard = () => {
         productsRes,
         statusRes
       ] = await Promise.all([
-        axios.get('/api/analytics/dashboard-stats'),
-        axios.get(`/api/analytics/transaction-trends?days=${timeRange}`),
-        axios.get('/api/analytics/revenue-by-platform'),
-        axios.get(`/api/analytics/user-growth?days=${timeRange}`),
-        axios.get('/api/analytics/top-cards?limit=5'),
-        axios.get('/api/analytics/top-card-owners?limit=5'),
-        axios.get('/api/analytics/popular-products?limit=5'),
-        axios.get('/api/analytics/transaction-status')
+        api.get('/api/analytics/dashboard-stats'),
+        api.get(`/api/analytics/transaction-trends?days=${timeRange}`),
+        api.get('/api/analytics/revenue-by-platform'),
+        api.get(`/api/analytics/user-growth?days=${timeRange}`),
+        api.get('/api/analytics/top-cards?limit=5'),
+        api.get('/api/analytics/top-card-owners?limit=5'),
+        api.get('/api/analytics/popular-products?limit=5'),
+        api.get('/api/analytics/transaction-status')
       ]);
 
       setDashboardStats(statsRes.data.data);

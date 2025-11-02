@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import './PaymentModal.css';
 
 const PaymentModal = ({ transaction, onClose, onSuccess }) => {
@@ -37,7 +37,7 @@ const PaymentModal = ({ transaction, onClose, onSuccess }) => {
       setError('');
 
       // Create order
-      const { data } = await axios.post('/api/payment/create-order', {
+      const { data } = await api.post('/api/payment/create-order', {
         amount: transaction.serviceFee,
         transactionId: transaction._id,
       });
@@ -53,7 +53,7 @@ const PaymentModal = ({ transaction, onClose, onSuccess }) => {
         handler: async function (response) {
           try {
             // Verify payment
-            const verifyData = await axios.post('/api/payment/verify', {
+            const verifyData = await api.post('/api/payment/verify', {
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
