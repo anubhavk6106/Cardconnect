@@ -59,7 +59,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/kyc', kycRoutes);
 
-// ✅ Health check route (for testing deployment)
+// ✅ Health check route
 app.get('/', (req, res) => {
   res.json({
     message: '🚀 CardConnect API is running successfully!',
@@ -67,6 +67,53 @@ app.get('/', (req, res) => {
     environment: process.env.NODE_ENV || 'development',
   });
 });
+
+
+// ===================== ⚙️ TEMPORARY ADMIN CREATION ROUTE =====================
+const User = require('./models/User');
+app.get('/api/setup/create-admin', async (req, res) => {
+  try {
+    const existingAdmin = await User.findOne({ role: 'admin' });
+    if (existingAdmin) {
+      return res.status(200).json({
+        message: '⚠️ Admin already exists',
+        email: existingAdmin.email,
+        name: existingAdmin.name,
+      });
+    }
+
+    const adminData = {
+      name: 'Admin',
+      email: 'admin@cardconnect.com',
+      password: 'admin123',
+      role: 'admin',
+      phone: '1234567890',
+      address: {
+        street: 'Admin Street',
+        city: 'Admin City',
+        state: 'Admin State',
+        pincode: '000000',
+      },
+      isActive: true,
+    };
+
+    await User.create(adminData);
+
+    console.log('✅ Admin user created successfully!');
+    res.status(201).json({
+      message: '✅ Admin user created successfully!',
+      credentials: {
+        email: 'admin@cardconnect.com',
+        password: 'admin123',
+      },
+    });
+  } catch (error) {
+    console.error('❌ Error creating admin:', error.message);
+    res.status(500).json({ message: 'Error creating admin', error: error.message });
+  }
+});
+// ===================== ⚙️ END TEMPORARY ROUTE =====================
+
 
 // ✅ Error handling middleware
 app.use((err, req, res, next) => {
